@@ -1,18 +1,19 @@
 /**
  * Klasse, die eine Studentenverwaltung repräsentiert und BinTreeGen und StudentManagementInterface implementiert.
  */
-public class StudentManagement extends BinTreeGen implements StudentManagementInterface {
+public class StudentManagement extends BinTreeGen<Student> implements StudentManagementInterface {
 
     // Wurzel des Binärbaums
-    private BinNodeGen<Student> root = null;
+    private BinNodeGen<Student> root;
 
     // Standardkonstruktor
     StudentManagement() {
         super();
     }
 
-    StudentManagement(BinNodeGen<Student> s) {
-        super(s);
+    StudentManagement(Student s) {
+        super();
+        insertNode(s);
     }
 
     /**
@@ -22,7 +23,7 @@ public class StudentManagement extends BinTreeGen implements StudentManagementIn
      */
     @Override
     public int countStudents() {
-        return countNodes(root);
+        return countNodes();
     }
 
     /**
@@ -34,7 +35,7 @@ public class StudentManagement extends BinTreeGen implements StudentManagementIn
      */
     @Override
     public boolean insertStudent(Student student) {
-        if (find(student.matrikelNummer) != null) throw new IllegalArgumentException("Matrikelnummer ist bereits vergeben");
+        if (find(student) != null) throw new IllegalArgumentException("Matrikelnummer ist bereits vergeben");
         return insertNode(student);
     }
 
@@ -48,26 +49,12 @@ public class StudentManagement extends BinTreeGen implements StudentManagementIn
     @Override
     public Student searchStudent(int matrNo) throws IllegalArgumentException {
         if (matrNo < 100000) throw new IllegalArgumentException("Matrikelnummer muss größer als 100.000 sein");
-        return searchStudent(root, matrNo);
+        Student compareStudent = new Student(matrNo,"Test", "Test");
+        Student outputStundet = find(compareStudent).data;
+        return outputStundet;
     }
 
-    /**
-     * Hilfsmethode zum rekursiven Suchen eines Studenten im Binärbaum.
-     *
-     * @param nodeGen BinNodeGen-Objekt, das durch den Binärbaum traversiert wird
-     * @param matrNo  Matrikelnummer des zu suchenden Studenten
-     * @return Student mit der angegebenen Matrikelnummer oder null, wenn nicht gefunden
-     */
-    public Student searchStudent(BinNodeGen<Student> nodeGen, int matrNo) {
-//        if (nodeGen == null || nodeGen.data.matrikelNummer == matrNo) {
-//            return (nodeGen != null) ? nodeGen.data : null;
-//        }
-//        if (matrNo < nodeGen.data.matrikelNummer) {
-//            return searchStudent(root.left, matrNo);
-//        }
-//        return searchStudent(root.right, matrNo);
-        return (Student) find(nodeGen.data.matrikelNummer == matrNo);
-    }
+
 
     /**
      * Methode zum Überprüfen, ob ein Student im Binärbaum vorhanden ist.
@@ -79,6 +66,6 @@ public class StudentManagement extends BinTreeGen implements StudentManagementIn
     @Override
     public boolean isStudent(Student s) throws NullPointerException {
         if (s == null) throw new NullPointerException("Student kann nicht null sein");
-        return searchStudent(root, s.getMatriculationNo()) != null;
+        return searchStudent(s.getMatriculationNo()) != null;
     }
 }

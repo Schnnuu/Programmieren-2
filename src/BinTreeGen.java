@@ -1,6 +1,6 @@
 public class BinTreeGen<E extends Comparable<E>> implements BinTreeGenInterface<E> {
 
-    private BinNodeGen root = null;
+    private BinNodeGen<E> root;
 
     BinTreeGen() {
         root = null;
@@ -17,7 +17,7 @@ public class BinTreeGen<E extends Comparable<E>> implements BinTreeGenInterface<
         return countNodes(root);
     }
 
-    public int countNodes(BinNodeGen nodeGen){
+    public int countNodes(BinNodeGen<E> nodeGen){
         if (nodeGen == null) {
             return 0;
         }
@@ -33,24 +33,15 @@ public class BinTreeGen<E extends Comparable<E>> implements BinTreeGenInterface<
 
     @Override
     public boolean insertNode(E item) {
-//        if ( root == null) {
-//            return false;
-//        }
-
-        if (root == null) {
-            // This node is empty, insert the item here
-            root = (BinNodeGen) item;
+        if ( item == null) {
+            return false;
+        }
+        BinNodeGen<E> newNode = new BinNodeGen<>(item);
+        if(root == null) {
+            root = newNode;
             return true;
         }
 
-        BinNodeGen<E> existingNode = find(item);
-
-        if (existingNode != null) {
-            // Item already exists in the tree
-            return false;
-        }
-
-        // The item does not exist in the tree, proceed with insertion
         return insertNode(item, root);
     }
 
@@ -118,7 +109,7 @@ public class BinTreeGen<E extends Comparable<E>> implements BinTreeGenInterface<
             return;
         }
 
-        System.out.print(nodeGen.data + " ");
+        System.out.print(nodeGen.data);
         toString(result,nodeGen.left);
         toString(result,nodeGen.right);
     }

@@ -92,6 +92,14 @@ public class Student extends BinNodeGen implements StudentInterface, Comparable<
     // Vergleichsmethode für die Sortierung nach Matrikelnummer
     @Override
     public int compareTo(Student student) {
-        return Integer.compare(this.matrikelNummer, student.matrikelNummer);
+        int compare;
+        if (matrikelNummer < student.matrikelNummer){
+            compare = -1;
+        }
+        if (matrikelNummer > student.matrikelNummer){
+            compare = 1;
+        }
+        else compare = 0;
+        return compare;
     }
 }
