@@ -1,4 +1,4 @@
-public class BinTreeGen<E extends Comparable<E>> implements BinTreeGenInterface {
+public class BinTreeGen<E extends Comparable<E>> implements BinTreeGenInterface<E> {
 
     private BinNodeGen root = null;
 
@@ -32,14 +32,14 @@ public class BinTreeGen<E extends Comparable<E>> implements BinTreeGenInterface 
 
 
     @Override
-    public boolean insertNode(Comparable item) {
-        if (item == null) {
-            return false;
-        }
+    public boolean insertNode(E item) {
+//        if ( root == null) {
+//            return false;
+//        }
 
-        if (root.data == null) {
+        if (root == null) {
             // This node is empty, insert the item here
-            root.data = item;
+            root = (BinNodeGen) item;
             return true;
         }
 
@@ -54,7 +54,7 @@ public class BinTreeGen<E extends Comparable<E>> implements BinTreeGenInterface 
         return insertNode(item, root);
     }
 
-    private boolean insertNode(Comparable item, BinNodeGen<E> node) {
+    private boolean insertNode(E item, BinNodeGen<E> node) {
         int comparison = item.compareTo(node.data);
 
         if (comparison < 0) {
@@ -79,12 +79,18 @@ public class BinTreeGen<E extends Comparable<E>> implements BinTreeGenInterface 
 
 
     @Override
-    public BinNodeGen<E> find(Comparable item) throws NullPointerException {
+    public BinNodeGen<E> find(E item) throws NullPointerException {
+        if (root == null) {
+            return null;
+        }
         if (item == null) throw new NullPointerException("Item cannot be null.");
         return find(item, root);
     }
 
-    private BinNodeGen<E> find(Comparable item, BinNodeGen nodeGen) {
+    private BinNodeGen<E> find(E item, BinNodeGen<E> nodeGen) {
+        if (nodeGen == null){
+            return null;
+        }
         int compareResult = item.compareTo(nodeGen.data);
         if (compareResult == 0) {
             return nodeGen;
@@ -115,6 +121,5 @@ public class BinTreeGen<E extends Comparable<E>> implements BinTreeGenInterface 
         System.out.print(nodeGen.data + " ");
         toString(result,nodeGen.left);
         toString(result,nodeGen.right);
-
     }
 }

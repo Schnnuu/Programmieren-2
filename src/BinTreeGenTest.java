@@ -58,6 +58,7 @@ class BinTreeGenTest {
     void findElementIncluded(){
         // act
         BinNodeGen test = abb1.find(4);
+        System.out.println(test);
         //assert
         assertEquals( 4,test.data);
     }

@@ -1,58 +1,97 @@
-public class Student extends BinTreeGen implements StudentInterface{
-    private int matrikelNummer;
+/**
+ * Klasse, die einen Studenten repräsentiert und das StudentInterface, Comparable und BinNodeGen implementiert.
+ */
+public class Student extends BinNodeGen implements StudentInterface, Comparable<Student> {
+
+    // Matrikelnummer des Studenten
+    public int matrikelNummer;
+
+    // Name des Studenten
     private String name;
+
+    // Studiengang des Studenten
     private String course;
-    public Student(){
+
+    // Standardkonstruktor
+    public Student() {
 
     }
+
     /**
-     * a unique 6-digits matriculation number is assigned to each student
-     * upon enrollment
-     * each student has a name
-     * each student has a course he/she has enrolled for
+     * Konstruktor, der einen Studenten mit einer eindeutigen 6-stelligen Matrikelnummer, Namen und Studiengang erstellt.
      *
-     * @param m matriculation number, must be greater than or equal to 100000
-     * @param n name, cannot be null or empty string
-     * @param c course, cannot be null or empty string
-     * @throws IllegalArgumentException if matriculationNo, name or course is
-     *                                  not valid
-     * @throws NullPointerException     if name or course is null
+     * @param m Matrikelnummer, muss größer oder gleich 100000 sein
+     * @param n Name, darf nicht null oder ein leerer String sein
+     * @param c Studiengang, darf nicht null oder ein leerer String sein
+     * @throws IllegalArgumentException wenn Matrikelnummer, Name oder Studiengang ungültig sind
+     * @throws NullPointerException     wenn Name oder Studiengang null sind
      */
-    public Student(int m, String n, String c)
-            throws IllegalArgumentException, NullPointerException {
-        if (find(m) != null) throw new IllegalArgumentException("Matrikelnummer ist bereits vergeben");
+    public Student(int m, String n, String c) throws IllegalArgumentException, NullPointerException {
         matrikelNummer = m;
         name = n;
         course = c;
-
     }
 
+    // Getter für die Matrikelnummer
     @Override
     public int getMatriculationNo() {
         return matrikelNummer;
     }
 
+    // Getter für den Namen
     @Override
     public String getName() {
         return name;
     }
 
+    /**
+     * Setter für den Namen.
+     *
+     * @param name neuer Name, darf nicht null oder ein leerer String sein
+     * @throws NullPointerException     wenn der Name null ist
+     * @throws IllegalArgumentException wenn der Name ein leerer String ist
+     */
     @Override
     public void setName(String name) throws NullPointerException, IllegalArgumentException {
-        if (name == null)throw new NullPointerException("Name can't be null");
-        if (name.equals("")) throw new IllegalArgumentException("Name can't be empty");
+        if (name == null) throw new NullPointerException("Name kann nicht null sein");
+        if (name.equals("")) throw new IllegalArgumentException("Name kann nicht leer sein");
         this.name = name;
     }
 
+    // Getter für den Studiengang
     @Override
     public String getCourse() {
         return course;
     }
 
+    /**
+     * Setter für den Studiengang.
+     *
+     * @param course neuer Studiengang, darf nicht null oder ein leerer String sein
+     * @throws NullPointerException     wenn der Studiengang null ist
+     * @throws IllegalArgumentException wenn der Studiengang ein leerer String ist
+     */
     @Override
     public void setCourse(String course) throws NullPointerException, IllegalArgumentException {
-    if (course == null) throw new NullPointerException("Course can't be null");
-    if(course.equals(""))throw new IllegalArgumentException("Course can't be empty");
-    this.course = course;
+        if (course == null) throw new NullPointerException("Studiengang kann nicht null sein");
+        if (course.equals("")) throw new IllegalArgumentException("Studiengang kann nicht leer sein");
+        this.course = course;
+    }
+
+    // ToString-Methode für die Klasse Student
+    @Override
+    public String toString() {
+        return  "Student{" +
+                "matriculationNumber=" + matrikelNummer +
+                ", name='" + name + '\'' +
+                ", course='" + course + '\'' +
+                '}' +
+                "\n";
+    }
+
+    // Vergleichsmethode für die Sortierung nach Matrikelnummer
+    @Override
+    public int compareTo(Student student) {
+        return Integer.compare(this.matrikelNummer, student.matrikelNummer);
     }
 }

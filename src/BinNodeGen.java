@@ -21,7 +21,4 @@ public class BinNodeGen<E extends Comparable<E>> {
         left = l;
         right = r;
     }
-    public void compareTo(){
-
-    }
 }
