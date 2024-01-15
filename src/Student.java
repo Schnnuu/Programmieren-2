@@ -1,5 +1,7 @@
 /**
  * Klasse, die einen Studenten repräsentiert und das StudentInterface, Comparable und BinNodeGen implementiert.
+ *
+ * @param <E> Typ der Daten im Binärbaumknoten muss Comparable sein.
  */
 public class Student extends BinNodeGen implements StudentInterface, Comparable<Student> {
 
@@ -12,10 +14,6 @@ public class Student extends BinNodeGen implements StudentInterface, Comparable<
     // Studiengang des Studenten
     private String course;
 
-    // Standardkonstruktor
-    public Student() {
-
-    }
 
     /**
      * Konstruktor, der einen Studenten mit einer eindeutigen 6-stelligen Matrikelnummer, Namen und Studiengang erstellt.
@@ -54,7 +52,7 @@ public class Student extends BinNodeGen implements StudentInterface, Comparable<
     @Override
     public void setName(String name) throws NullPointerException, IllegalArgumentException {
         if (name == null) throw new NullPointerException("Name kann nicht null sein");
-        if (name.equals("")) throw new IllegalArgumentException("Name kann nicht leer sein");
+        if (name.isEmpty()) throw new IllegalArgumentException("Name kann nicht leer sein");
         this.name = name;
     }
 
@@ -74,7 +72,7 @@ public class Student extends BinNodeGen implements StudentInterface, Comparable<
     @Override
     public void setCourse(String course) throws NullPointerException, IllegalArgumentException {
         if (course == null) throw new NullPointerException("Studiengang kann nicht null sein");
-        if (course.equals("")) throw new IllegalArgumentException("Studiengang kann nicht leer sein");
+        if (course.isEmpty()) throw new IllegalArgumentException("Studiengang kann nicht leer sein");
         this.course = course;
     }
 

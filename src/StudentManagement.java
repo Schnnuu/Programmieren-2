@@ -1,5 +1,7 @@
 /**
  * Klasse, die eine Studentenverwaltung repräsentiert und BinTreeGen und StudentManagementInterface implementiert.
+ *
+ * @param <E> Typ der Daten im Binärbaumknoten muss Student sein.
  */
 public class StudentManagement extends BinTreeGen<Student> implements StudentManagementInterface {
 
@@ -9,8 +11,14 @@ public class StudentManagement extends BinTreeGen<Student> implements StudentMan
     // Standardkonstruktor
     StudentManagement() {
         super();
+        // Initialisiert die Basisklasse BinTreeGen
     }
 
+    /**
+     * Konstruktor zum Erstellen einer Studentenverwaltung mit einem anfänglichen Studenten.
+     *
+     * @param s Der anfängliche Student, der in den Binärbaum eingefügt wird.
+     */
     StudentManagement(Student s) {
         super();
         insertNode(s);
@@ -49,12 +57,9 @@ public class StudentManagement extends BinTreeGen<Student> implements StudentMan
     @Override
     public Student searchStudent(int matrNo) throws IllegalArgumentException {
         if (matrNo < 100000) throw new IllegalArgumentException("Matrikelnummer muss größer als 100.000 sein");
-        Student compareStudent = new Student(matrNo,"Test", "Test");
-        Student outputStundet = find(compareStudent).data;
-        return outputStundet;
+        Student compareStudent = new Student(matrNo, "Test", "Test");
+        return find(compareStudent).data;
     }
-
-
 
     /**
      * Methode zum Überprüfen, ob ein Student im Binärbaum vorhanden ist.

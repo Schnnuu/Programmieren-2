@@ -1,22 +1,39 @@
+/**
+ * Generic Binary Tree Node.
+ *
+ * @param <E> Type of data stored in the node, must be Comparable.
+ */
 public class BinNodeGen<E extends Comparable<E>> {
-    E data; // Data stored in the node
-    BinNodeGen<E> left, right; // References to left and right children
+    E data; // Daten im Knoten
+    BinNodeGen<E> left, right; // Verweise auf linke und rechte Kinder
 
-    // Constructors for BinNode
+    // Konstruktoren für BinNode
 
-    // Default constructor initializes left and right children as null
+    /**
+     * Standardkonstruktor initialisiert linke und rechte Kinder als null.
+     */
     BinNodeGen() {
         left = right = null;
     }
 
-    // Constructor to create a node with given data and both children as null
+    /**
+     * Konstruktor, um einen Knoten mit gegebenen Daten zu erstellen, beide Kinder sind null.
+     *
+     * @param data Die Daten für den Knoten.
+     */
     BinNodeGen(E data) {
         this.data = data;
         left = right = null;
     }
 
-    // Constructor to create a node with given data, left child, and right child
-    BinNodeGen(E d, BinNodeGen l, BinNodeGen r) {
+    /**
+     * Konstruktor, um einen Knoten mit gegebenen Daten, linkem Kind und rechtem Kind zu erstellen.
+     *
+     * @param d Die Daten für den Knoten.
+     * @param l Das linke Kind des Knotens.
+     * @param r Das rechte Kind des Knotens.
+     */
+    BinNodeGen(E d, BinNodeGen<E> l, BinNodeGen<E> r) {
         data = d;
         left = l;
         right = r;
